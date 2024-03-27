@@ -2,6 +2,18 @@
 LEdits++ is a textual image editing method for Stable Diffusion XL and variants. See the [paper](https://arxiv.org/abs/2301.12247), Hugging Face [demo](https://huggingface.co/spaces/editing-images/leditsplusplus) and [docs](https://huggingface.co/docs/diffusers/v0.27.2/en/api/pipelines/ledits_pp) for details.
 
 ## How to use the API
+You need to have Cog and Docker installed to run this model locally. To build the docker image with cog and run a prediction:
+
+```
+cog predict -i image=@examples/tennis.jpg -i editing_prompts="tennis ball, tomato" -i skip=0.20 -i reverse_editing_directions="True, False" -i edit_guidance_scale="5.0, 10.0" -i edit_threshold="0.9, 0.85"
+```
+
+To start a server and send requests to your locally or remotely deployed API:
+
+```
+cog run -p 5000 python -m cog.server.http
+```
+
 To edit an image with LEdits++, upload an image and specify the objects you would like to remove or add as a comma separated string. In order to edit an object in place (e.g. changing an apple to an orange), both nouns need to included in the *editing_prompts* as removal and addition targets respectively. The full list of API arguments are as follows: 
 
 - **image:** Input image to edit.  
